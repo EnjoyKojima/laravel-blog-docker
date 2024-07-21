@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     --fix-missing
 
 # PHP拡張のインストール
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip mysqli
+RUN docker-php-ext-install mbstring exif pcntl bcmath gd zip pdo pdo_mysql
 
 # Composerのインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -59,7 +59,7 @@ RUN php artisan storage:link
 RUN npm run build
 
 # ポートの公開
-EXPOSE 3000
+EXPOSE 8000
 
 # PHPサーバーの起動
 CMD ["php-fpm"]

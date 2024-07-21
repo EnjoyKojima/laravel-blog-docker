@@ -32,9 +32,6 @@ npm run build
 
 アプリケーションの初期設定
 ```bash
-php artisan key:generate
-php artisan horizon:install
-php artisan telescope:install
-php artisan storage:link
+php artisan migrate
+php artisan db:seed
 ```
-

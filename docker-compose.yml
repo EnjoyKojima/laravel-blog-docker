@@ -6,6 +6,30 @@ services:
     image: laravel-blog-app
     container_name: laravel-blog-app
     ports:
-      - "3000:3000"
+      - "8000:8000"
+      - "8025:8025"
     volumes:
       - ./laravel-blog:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - laravel-network
+
+  db:
+    image: mysql:5.7
+    container_name: laravel-blog-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
